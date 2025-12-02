@@ -31,28 +31,6 @@ static int SolvePart1(string[] input)
     return result;
 }
 
-static int Turn(int currentStep, int maxSteps, int steps)
-{
-    var newStep = currentStep;
-    for (var i = 0; i < Math.Abs(steps); i++)
-    {
-        newStep = steps < 0 ? newStep - 1 : newStep + 1;
-        if (newStep < 0) newStep = maxSteps;
-        else if (newStep > maxSteps) newStep = 0;
-    }
-    return newStep;
-}
-
-static int ParseComboTurn(string combo)
-{
-    var regex = new Regex(@"^([LR])(\d+)$", RegexOptions.Compiled);
-    var match = regex.Match(combo.ToUpper());
-    if (!match.Success) throw new Exception();
-    var turn = match.Groups[1].Value[0];
-    var steps = int.Parse(match.Groups[2].Value);
-    return turn == 'R' ? steps : -steps;
-}
-
 static int SolvePart2(string[] input)
 {
     int result = 0;
@@ -67,6 +45,27 @@ static int SolvePart2(string[] input)
     return result;
 }
 
+static int ParseComboTurn(string turn)
+{
+    var regex = new Regex(@"^([LR])(\d+)$", RegexOptions.Compiled);
+    var match = regex.Match(turn.ToUpper());
+    if (!match.Success) throw new Exception();
+    var direction = match.Groups[1].Value[0];
+    var steps = int.Parse(match.Groups[2].Value);
+    return direction == 'R' ? steps : -steps;
+}
+
+static int Turn(int currentStep, int maxSteps, int steps)
+{
+    var newStep = currentStep;
+    for (var i = 0; i < Math.Abs(steps); i++)
+    {
+        newStep = steps < 0 ? newStep - 1 : newStep + 1;
+        if (newStep < 0) newStep = maxSteps;
+        else if (newStep > maxSteps) newStep = 0;
+    }
+    return newStep;
+}
 
 static (int, int) TurnAndCountZero(int currentStep, int maxSteps, int steps)
 {
