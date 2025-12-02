@@ -22,9 +22,9 @@ static int SolvePart1(string[] input)
     int result = 0;
     const int maxStep = 99;
     int currentStep = 50;
-    foreach (var combo in input)
+    foreach (var turn in input)
     {
-        int steps = ParseComboTurn(combo);
+        int steps = ParseComboTurn(turn);
         currentStep = Turn(currentStep, maxStep, steps);
         if(currentStep == 0) result++;
     }
@@ -39,7 +39,7 @@ static int SolvePart2(string[] input)
     foreach (var combo in input)
     {
         int steps = ParseComboTurn(combo);
-        (currentStep, var zeroCout) = TurnAndCountZero(currentStep, maxStep, steps);
+        (currentStep, var zeroCout) = TurnAndCountZeros(currentStep, maxStep, steps);
         result += zeroCout;
     }
     return result;
@@ -60,23 +60,27 @@ static int Turn(int currentStep, int maxSteps, int steps)
     var newStep = currentStep;
     for (var i = 0; i < Math.Abs(steps); i++)
     {
-        newStep = steps < 0 ? newStep - 1 : newStep + 1;
-        if (newStep < 0) newStep = maxSteps;
-        else if (newStep > maxSteps) newStep = 0;
+        newStep = GetNextStepPosition(newStep, steps, maxSteps);
     }
     return newStep;
 }
 
-static (int, int) TurnAndCountZero(int currentStep, int maxSteps, int steps)
+static (int, int) TurnAndCountZeros(int currentStep, int maxSteps, int steps)
 {
     var newStep = currentStep;
     var zeroCount = 0;
     for (var i = 0; i < Math.Abs(steps); i++)
     {
-        newStep = steps < 0 ? newStep - 1 : newStep + 1;
-        if (newStep < 0) newStep = maxSteps;
-        else if (newStep > maxSteps) newStep = 0;
+        newStep = GetNextStepPosition(newStep, steps, maxSteps);
         if (newStep == 0) zeroCount++;
     }
     return (newStep, zeroCount);
+}
+
+static int GetNextStepPosition(int newStep, int steps, int maxSteps)
+{
+    newStep = steps < 0 ? newStep - 1 : newStep + 1;
+    if (newStep < 0) newStep = maxSteps;
+    else if (newStep > maxSteps) newStep = 0;
+    return newStep;
 }
