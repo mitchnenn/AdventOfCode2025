@@ -1,0 +1,36 @@
+// Numeric operations
+int sum = numbers.Sum();
+int max = numbers.Max();
+int min = numbers.Min();
+
+// Grouping and counting
+var groups = lines.GroupBy(x => x)
+    .ToDictionary(g => g.Key, g => g.Count());
+
+// LINQ queries
+var filtered = lines.Where(x => x.Length > 5)
+    .OrderBy(x => x)
+    .ToList();
+
+// Grid/2D array handling
+var grid = lines.Select(l => l.ToCharArray())
+    .ToArray();
+char cell = grid[y][x];
+
+// Boilerplate structure.
+var path = "sample_input.txt";
+//var path = "input.txt";
+
+var lines = path.ReadAllLines();
+lines.ToList().ForEach(Console.WriteLine);
+
+// Part 1
+var result1 = SolvePart1(lines);
+Console.WriteLine($"Part 1: {result1}");
+
+// Part 2
+var result2 = SolvePart2(lines);
+Console.WriteLine($"Part 2: {result2}");
+
+static int SolvePart1(string[] input) { /* ... */ return 0; }
+static int SolvePart2(string[] input) { /* ... */ return 0; }
