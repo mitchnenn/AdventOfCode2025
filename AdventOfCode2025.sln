@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonUnitTests", "CommonUnitTests\CommonUnitTests.csproj", "{A01C7EC9-8D11-4867-AFA9-28019084410B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day_02", "Day_02\Day_02.csproj", "{4723384F-712D-4D88-9A79-846639C9E605}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{A01C7EC9-8D11-4867-AFA9-28019084410B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A01C7EC9-8D11-4867-AFA9-28019084410B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A01C7EC9-8D11-4867-AFA9-28019084410B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4723384F-712D-4D88-9A79-846639C9E605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4723384F-712D-4D88-9A79-846639C9E605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4723384F-712D-4D88-9A79-846639C9E605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4723384F-712D-4D88-9A79-846639C9E605}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
