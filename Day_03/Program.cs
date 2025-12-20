@@ -2,8 +2,8 @@
 
 using Common;
 
-var path = "sample_input.txt";
-//var path = "input.txt";
+//var path = "sample_input.txt";
+var path = "input.txt";
 
 var banks = path.ReadAllLines();
 banks.ToList().ForEach(Console.WriteLine);
