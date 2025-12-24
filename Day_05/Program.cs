@@ -16,32 +16,21 @@ Console.WriteLine($"Part 1: {result1}");
 var result2 = SolvePart2(lines);
 Console.WriteLine($"Part 2: {result2}");
 
-static ulong SolvePart1(string[] input) 
+static int SolvePart1(string[] input) 
 {
-    ulong count = 0;
-    foreach (var ingredient in GetIngredientIds(input))
+    return GetIngredientIds(input)
+        .Count(id => AllFreshRanges(input).Any(range => 
+                id >= range.Minimum && id <= range.Maximum));
+}
+
+static ulong SolvePart2(string[] input)
+{
+    var count = 0UL;
+    foreach (var range in UniqueFreshRanges(input))
     {
-        if (GetFreshRanges(input).Any(fresh => 
-                ingredient >= fresh.Minimum 
-                && ingredient <= fresh.Maximum))
-        {
-            count++;
-        }
+        count += range.Maximum - range.Minimum + 1; 
     }
     return count;
-}
-
-static int SolvePart2(string[] input) 
-{ 
-    return 0; 
-}
-
-static IEnumerable<(ulong Minimum, ulong Maximum)> GetFreshRanges(string[] input)
-{
-    return input
-        .TakeWhile(x => !string.IsNullOrEmpty(x))
-        .Select(i => i.Split('-'))
-        .Select(s => (ulong.Parse(s[0]), ulong.Parse(s[1])));
 }
 
 static IEnumerable<ulong> GetIngredientIds(string[] input)
@@ -52,3 +41,22 @@ static IEnumerable<ulong> GetIngredientIds(string[] input)
         .ToList();
 }
 
+static IEnumerable<(ulong Minimum, ulong Maximum)> AllFreshRanges(string[] input)
+{
+    return input
+        .TakeWhile(x => !string.IsNullOrEmpty(x))
+        .Select(i => i.Split('-'))
+        .Select(s => (ulong.Parse(s[0]), ulong.Parse(s[1])));
+}
+
+static IEnumerable<(ulong Minimum, ulong Maximum)> UniqueFreshRanges(string[] input)
+{
+    foreach (var ingredientId in GetIngredientIds(input))
+    {
+        foreach (var range in AllFreshRanges(input))
+        {
+            if (ingredientId < range.Minimum || ingredientId > range.Maximum) continue;
+            yield return range;
+        }    
+    }
+}
