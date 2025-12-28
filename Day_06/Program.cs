@@ -20,10 +20,10 @@ Console.WriteLine($"Part 2: {result2}");
 static long SolvePart1(string[] input)
 {
     var count = 0L;
-    foreach (var operaton in ParseInput(input))
+    foreach (var operation in ParseInput(input))
     {
-        var numbers = operaton.Operands.Select(long.Parse);
-        switch (operaton.Operation)
+        var numbers = operation.Operands.Select(long.Parse);
+        switch (operation.Operation)
         {
             case "+":
                 count += numbers.Aggregate((a, b) => a + b);
@@ -32,7 +32,7 @@ static long SolvePart1(string[] input)
                 count += numbers.Aggregate((a, b) => a * b);
                 break;
             default:
-                Debug.Assert(false, $"Unknown operation: {operaton.Operation}");
+                Debug.Assert(false, $"Unknown operation: {operation.Operation}");
                 break;
         }
     }
